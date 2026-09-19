@@ -17,3 +17,34 @@ model User {
 
   @@map("users")
 }
+
+model Brewery {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?  @db.Text
+  address     String?
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  beers       Beer[]
+
+  @@map("breweries")
+}
+
+model Beer {
+  id          Int      @id @default(autoincrement())
+  name        String
+  style       String?
+  abv         Float?
+  description String?  @db.Text
+  imageUrl    String?
+  breweryId   Int
+  brewery     Brewery  @relation(fields: [breweryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([breweryId])
+  @@map("beers")
+}
