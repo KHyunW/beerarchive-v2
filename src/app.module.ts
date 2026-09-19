@@ -5,6 +5,8 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { BreweriesModule } from './breweries/breweries.module.js';
+import { BeersModule } from './beers/beers.module.js';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { AuthModule } from './auth/auth.module.js';
     PrismaModule,
     UsersModule,
     AuthModule,
+    BreweriesModule,
+    BeersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
