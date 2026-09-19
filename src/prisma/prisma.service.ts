@@ -12,6 +12,7 @@ function buildAdapter() {
     password: url.password,
     database: url.pathname.replace('/', ''),
     connectionLimit: 5,
+    allowPublicKeyRetrieval: true,
   });
 }
 
