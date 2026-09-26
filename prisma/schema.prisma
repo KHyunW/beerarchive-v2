@@ -15,6 +15,8 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  reviews      Review[]
+
   @@map("users")
 }
 
@@ -45,6 +47,24 @@ model Beer {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  reviews     Review[]
+
   @@index([breweryId])
   @@map("beers")
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  content   String?  @db.Text
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  beerId    Int
+  beer      Beer     @relation(fields: [beerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, beerId])
+  @@index([beerId])
+  @@map("reviews")
 }
