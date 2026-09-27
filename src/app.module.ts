@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module.js';
 import { BreweriesModule } from './breweries/breweries.module.js';
 import { BeersModule } from './beers/beers.module.js';
 import { ReviewsModule } from './reviews/reviews.module.js';
+import { PostsModule } from './posts/posts.module.js';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ReviewsModule } from './reviews/reviews.module.js';
     BreweriesModule,
     BeersModule,
     ReviewsModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -16,6 +16,7 @@ model User {
   updatedAt    DateTime @updatedAt
 
   reviews      Review[]
+  posts        Post[]
 
   @@map("users")
 }
@@ -67,4 +68,17 @@ model Review {
   @@unique([userId, beerId])
   @@index([beerId])
   @@map("reviews")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String   @db.Text
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("posts")
 }
