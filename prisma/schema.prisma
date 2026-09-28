@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -15,8 +15,9 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  reviews      Review[]
-  posts        Post[]
+  reviews Review[]
+  posts   Post[]
+  likes   Like[]
 
   @@map("users")
 }
@@ -31,7 +32,7 @@ model Brewery {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  beers       Beer[]
+  beers Beer[]
 
   @@map("breweries")
 }
@@ -48,7 +49,9 @@ model Beer {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  reviews     Review[]
+  reviews Review[]
+
+  likes   Like[]
 
   @@index([breweryId])
   @@map("beers")
@@ -79,6 +82,23 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  likes     Like[]
+
   @@index([userId])
   @@map("posts")
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId    Int?
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  beerId    Int?
+  beer      Beer?    @relation(fields: [beerId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+  @@unique([userId, beerId])
+  @@map("likes")
 }
