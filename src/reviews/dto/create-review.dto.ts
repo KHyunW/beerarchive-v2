@@ -8,7 +8,7 @@ export class CreateReviewDto {
 
     @IsString()
     @IsOptional()
-    ccontent?: string;
+    content?: string;
 
     @IsInt()
     beerId: number;

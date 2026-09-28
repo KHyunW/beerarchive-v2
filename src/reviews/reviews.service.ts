@@ -27,7 +27,7 @@ export class ReviewsService {
     return this.prisma.review.create({
       data: {
         rating: createReviewDto.rating,
-        content: createReviewDto.ccontent,
+        content: createReviewDto.content,
         userId,
         beerId: createReviewDto.beerId,
       },
